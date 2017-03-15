@@ -8,6 +8,7 @@ EFFECT=(-filter Gaussian -resize 20% -define filter:sigma=1.5 -resize 500.5%)
 # default system sans-serif font
 FONT="$(convert -list font | awk "{ a[NR] = \$2 } /family: $(fc-match sans -f "%{family}\n")/ { print a[NR-1]; exit }")"
 IMAGE="$(mktemp).png"
+SHOT=(import -window root)
 
 OPTIONS="Options:
     -h, --help   This help menu.
@@ -57,7 +58,8 @@ done
 SCRIPTPATH=$(realpath "$0")
 SCRIPTPATH=${SCRIPTPATH%/*}
 
-scrot -z "$IMAGE"
+#scrot -z "$IMAGE"
+"${SHOT[@]}" "$IMAGE"
 ICON="$SCRIPTPATH/lock.png"
 PARAM=(--textcolor=ffffff00 --insidecolor=ffffff1c --ringcolor=ffffff3e \
        --linecolor=ffffff00 --keyhlcolor=00000080 --ringvercolor=00000000 \
